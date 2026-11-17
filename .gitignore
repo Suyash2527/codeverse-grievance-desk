@@ -23,6 +23,7 @@ docs/demo/build/
 docs/screenshots/crops/
 *.webm
 
-# Office lock files and the superseded first deck
+# Office lock files, and the idea deck (shared via Google Drive, not GitHub)
 ~$*
-CodeVerse_HackFusion4_Idea.pptx
+CodeVerse_HackFusion4_Idea*.pptx
+CodeVerse_HackFusion4_Idea*.pdf
