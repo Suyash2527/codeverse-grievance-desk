@@ -1,0 +1,460 @@
+@import "tailwindcss";
+
+/*
+  Concept: a hospital triage board.
+
+  This screen is not an archive, it is where someone decides what to do next.
+  So: clinical cool-white, oversized status chips readable across a room, one
+  deep teal for the service, and amber and rose reserved strictly for urgency.
+  Blocks, not dense rows.
+
+  Colour discipline, in one place so it cannot drift:
+    teal  = the service, and the primary action
+    amber = time pressure, nothing else
+    rose  = a policy rule applies here, nothing else
+  Every status colour ships with a word, never colour alone.
+*/
+
+@theme {
+  /* ---- the environment is red; the panels are the paper ----
+     Cream cards sit on a red field at 4.61, which reads as a clear panel.
+     Text goes on the cards, not on the red, except headings and labels
+     where white (5.10) or chartreuse at display size carries it. ---- */
+  /* ---- (previous note) warm paper, deliberately dimmed ----
+     A brighter cream glares on a large screen, and the white cards need
+     something to sit against: at this value they separate clearly while
+     every text colour still clears 5:1. ---- */
+  --color-surface-page: #faf9f6;
+  --color-surface-card: #faf9f6;
+  --color-surface-sunk: #efede7;
+
+  /* Brutalist structure: the rule IS the edge, so it is black and
+     heavy. A softer line stays for dividers inside a box. */
+  --color-line: #111010;
+  --color-line-soft: #e2dfd7;
+  --color-line-strong: #111010;
+
+  /* ---- ink: three steps, all at or above 5:1 on the page ---- */
+  --color-ink: #111010;
+  --color-ink-2: #3a3733;
+  --color-ink-3: #63605a;
+
+  /* ---- chartreuse: the service, and anything permitted.
+         Measured against the red at 44.0 deltaE under deuteranopia, the
+         widest separation of anything tried, because the two differ in
+         lightness as well as hue. It is 1.03 against the page, so a black
+         border is REQUIRED, not decorative - a lime block without one is
+         invisible. Black text on it reads 16.7:1; white never. ---- */
+  --color-teal: #dfff00;
+  --color-teal-deep: #c9e600;
+  --color-teal-tint: #f2ffb8;
+
+  /* ---- amber: time pressure only. Carried by chips with white text
+         (4.6:1), never as small coloured text on the page. ---- */
+  --color-amber: #111010;
+  --color-amber-tint: #e9e6de;
+
+  /* ---- rose: a policy rule applies. 19.0 deltaE from amber for normal
+         vision; the teal/rose pair sits in the CVD floor band, which is why
+         every status chip also carries a word. ---- */
+  --color-rose: #d22b2b;
+  --color-rose-tint: #faf9f6;
+
+  --color-series-1: #dfff00;
+
+  /* Devanagari sits in BOTH stacks: Marathi and Hindi must never fall back
+     to a random system face, which is what made Indic text look broken. */
+  --font-display: var(--font-manrope), var(--font-devanagari), ui-sans-serif,
+    system-ui;
+  --font-sans: var(--font-manrope), var(--font-devanagari), ui-sans-serif,
+    system-ui;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* One radius system: 10px reads approachable, which is the point. */
+    /* Rounded, but still outlined in heavy black: the softness is in the
+     corners, the structure is still the rule. */
+  --radius-card: 14px;
+  --radius-chip: 999px;
+
+  /* Motion personality: quick and snappy. This is a tool, not a showcase. */
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-surface-page);
+}
+
+body {
+  background: var(--color-surface-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* 16px on a phone: the smallest size iOS will not zoom a form field for. */
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Indic text wants a little more leading than Latin at the same size. */
+:lang(mr),
+:lang(hi) {
+  line-height: 1.75;
+}
+
+/* Fluid headings: one scale that works from 360px to desktop without a
+   pile of breakpoints. */
+h1 {
+  font-size: clamp(2.25rem, 1.4rem + 3.8vw, 3.75rem);
+  font-weight: 800;
+  text-transform: none;
+}
+h2 {
+  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.6rem);
+  font-weight: 700;
+}
+h3 {
+  font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.25rem);
+  font-weight: 700;
+}
+
+/* Every tap target clears 44px on touch, without bloating the desktop UI. */
+@media (pointer: coarse) {
+  a,
+  button,
+  [role="button"],
+  select {
+    min-height: 44px;
+  }
+  .pressable {
+    min-height: 44px;
+  }
+}
+
+/* Shadows are tinted with the ink, never grey-black, and always soft. */
+.card {
+  background: var(--color-surface-card);
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+.card-interactive {
+  transition:
+    transform 160ms var(--ease-move),
+    box-shadow 160ms var(--ease-move),
+    border-color 160ms var(--ease-move);
+}
+/* The affordance is a hard offset block, not a blur: the card looks like
+   it is physically lifted off the page. */
+.card-interactive:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 0 var(--color-ink);
+  border-radius: var(--radius-card);
+}
+.card-interactive:active {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 0 var(--color-ink);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Reference numbers only. Monospace is a label here, not a body face. */
+.ref {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-rose);
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+/* Skeletons: a calm shimmer, so a slow API reads as loading rather than as
+   an empty screen. */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-sunk);
+  border-radius: 8px;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: shimmer 1.4s var(--ease-move) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Signature motion 1: the queue arrives in reading order.             */
+/* ------------------------------------------------------------------ */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 420ms var(--ease-entrance) both;
+  animation-delay: calc(var(--row-index, 0) * 40ms);
+}
+
+.quiet-in {
+  animation: rise-in 380ms var(--ease-entrance) both;
+  animation-delay: calc(var(--delay, 0) * 1ms);
+}
+
+/* ------------------------------------------------------------------ */
+/* Signature motion 2: the verdict chip lands on the case.             */
+/* ------------------------------------------------------------------ */
+
+@keyframes chip-land {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.chip-land {
+  animation: chip-land 320ms var(--ease-entrance) both;
+  animation-delay: 120ms;
+}
+
+/* ------------------------------------------------------------------ */
+/* Signature motion 3: the confidence meter draws once.                */
+/* ------------------------------------------------------------------ */
+
+@keyframes meter-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.meter-fill {
+  transform-origin: left center;
+  animation: meter-draw 560ms var(--ease-entrance) both;
+  animation-delay: 160ms;
+}
+
+.pressable {
+  transition:
+    transform 140ms var(--ease-move),
+    background-color 140ms var(--ease-move),
+    border-color 140ms var(--ease-move),
+    color 140ms var(--ease-move);
+}
+.pressable:active {
+  transform: scale(0.98);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+::selection {
+  background: var(--color-teal-tint);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .meter-fill {
+    transform: none !important;
+  }
+  .card-interactive:hover {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll reveal. Travel stays small; large slide-ins look cheap.      */
+/* ------------------------------------------------------------------ */
+
+.to-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 560ms var(--ease-entrance),
+    transform 560ms var(--ease-entrance);
+}
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 560ms var(--ease-entrance),
+    transform 560ms var(--ease-entrance);
+}
+
+/* A hairline that draws itself under a heading, once. */
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.rule-draw {
+  transform-origin: left center;
+  animation: rule-draw 620ms var(--ease-entrance) both;
+}
+
+/* Link underline that grows from the left on hover. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: left 100%;
+  transition: background-size 220ms var(--ease-move);
+  padding-bottom: 2px;
+}
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+/* The one ambient element: a soft teal wash behind the landing hero.
+   Palette colours only, no blobs, slow enough to ignore. */
+/* Replaces the soft wash: a visible grid, like paper ruled for a form. */
+.hero-wash {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(11, 11, 11, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 11, 11, 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Arrow that travels on hover, for "go" affordances. */
+.arrow-travel {
+  display: inline-block;
+  transition: transform 200ms var(--ease-move);
+}
+.group:hover .arrow-travel {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .to-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .rule-draw {
+    animation: none;
+  }
+}
+
+/* Mono metadata: reference numbers, counts and labels read as data. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+  color: var(--color-ink-2);
+}
+
+/* A heavy rule used to separate major blocks. */
+.rule-hard {
+  height: 2px;
+  background: var(--color-ink);
+}
+
+/* Type accent. Red as TYPE is emphasis; red as a FILL is always policy. */
+.accent {
+  color: var(--color-rose);
+}
+
+/* A headline whose last line carries the accent. */
+.headline-accent em {
+  font-style: normal;
+  color: var(--color-rose);
+}
+
+/* Links read as links: accent colour plus an underline that draws in. */
+.link-accent {
+  color: var(--color-rose);
+  font-weight: 600;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left 100%;
+  transition: background-size 220ms var(--ease-move);
+  padding-bottom: 2px;
+}
+.link-accent:hover {
+  background-size: 100% 2px;
+}
+
+/* Sensitive cases in the queue spine. Red is reserved for type, so this
+   signal is carried by texture instead: a hatched black bar reads as
+   different from the solid black "human review" spine at a glance, in
+   greyscale, and for every kind of colour vision. */
+.spine-sensitive {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-ink) 0 3px,
+    var(--color-surface-card) 3px 6px
+  );
+}

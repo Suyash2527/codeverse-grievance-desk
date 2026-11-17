@@ -1,0 +1,4 @@
+category_id,category,subcategory,responsible_department_id,responsible_department,default_assignee,sla_days,sensitive,identity_hiding,default_priority,auto_resolution_allowed,policy_note
+C001,Roads and Infrastructure,Potholes / damaged roads,D003,Sanitation Department,Sanitation Department - Night Shift (Demo),1,True,False,CRITICAL,False,Reclassified as sensitive in this replacement master; never auto-close.
+C002,Roads and Infrastructure,Footpath / sidewalk damage,D001,Public Works Department,Public Works Department - Duty Officer (Demo),9,False,True,LOW,True,Identity-hiding without being sensitive; mask identity but automation is permitted.
+C900,New Category Not In Original,Invented subcategory for swap testing,D002,Water Supply Department,Water Supply Department - Duty Officer (Demo),2,False,False,HIGH,True,A category that does not exist in the supplied master at all.

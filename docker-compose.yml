@@ -1,0 +1,23 @@
+# Local Postgres with pgvector, for building without depending on venue wifi.
+# The same schema runs on Supabase and, in round two, on AWS RDS: only
+# DATABASE_URL changes.
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: hackfusion-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hackfusion
+    ports:
+      - "5432:5432"
+    volumes:
+      - hackfusion_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hackfusion"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  hackfusion_pgdata:

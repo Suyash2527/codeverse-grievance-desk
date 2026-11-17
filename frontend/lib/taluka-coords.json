@@ -1,0 +1,122 @@
+{
+  "source": "Nominatim / OpenStreetMap",
+  "licence": "© OpenStreetMap contributors, ODbL",
+  "query_suffix": "Nanded, Maharashtra, India",
+  "resolved": 16,
+  "total": 16,
+  "note": "Centroids returned by a place search, not administrative boundaries. A taluka with null coordinates was not resolved and is omitted from the map rather than placed by guesswork.",
+  "talukas": {
+    "Ardhapur": {
+      "lat": 19.269321,
+      "lon": 77.4149956,
+      "display_name": "Ardhapur, Nanded, Maharashtra, 431704, India",
+      "osm_type": "relation",
+      "osm_id": 10340196
+    },
+    "Bhokar": {
+      "lat": 19.1948254,
+      "lon": 77.683399,
+      "display_name": "Bhokar, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340198
+    },
+    "Biloli": {
+      "lat": 18.7652842,
+      "lon": 77.6968335,
+      "display_name": "Biloli, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340188
+    },
+    "Degloor": {
+      "lat": 18.5496593,
+      "lon": 77.5790877,
+      "display_name": "Degloor, Deglur, Nanded, Maharashtra, 431717, India",
+      "osm_type": "node",
+      "osm_id": 245648398
+    },
+    "Dharmabad": {
+      "lat": 18.9216786,
+      "lon": 77.762348,
+      "display_name": "Dharmabad, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340189
+    },
+    "Hadgaon": {
+      "lat": 19.4786171,
+      "lon": 77.6068042,
+      "display_name": "Hadgaon, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340199
+    },
+    "Himayatnagar": {
+      "lat": 19.4112104,
+      "lon": 77.8437928,
+      "display_name": "Himayatnagar, Nanded, Maharashtra, 431802, India",
+      "osm_type": "relation",
+      "osm_id": 10340200
+    },
+    "Kandhar": {
+      "lat": 18.8424512,
+      "lon": 77.2510666,
+      "display_name": "Kandhar, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340192
+    },
+    "Kinwat": {
+      "lat": 19.577469,
+      "lon": 78.2440088,
+      "display_name": "Kinwat, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340201
+    },
+    "Loha": {
+      "lat": 18.9360844,
+      "lon": 77.1015489,
+      "display_name": "Loha, Nanded, Maharashtra, 431708, India",
+      "osm_type": "relation",
+      "osm_id": 10340193
+    },
+    "Mahur": {
+      "lat": 19.8479785,
+      "lon": 77.9217634,
+      "display_name": "Mahur, Mahoor, Nanded, Maharashtra, India",
+      "osm_type": "node",
+      "osm_id": 2188102823
+    },
+    "Mudkhed": {
+      "lat": 19.1393504,
+      "lon": 77.501393,
+      "display_name": "Mudkhed, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340197
+    },
+    "Mukhed": {
+      "lat": 18.5753653,
+      "lon": 77.3839246,
+      "display_name": "Mukhed, Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340191
+    },
+    "Naigaon": {
+      "lat": 18.8766865,
+      "lon": 77.5119088,
+      "display_name": "Naigaon (Khairgaon), Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340187
+    },
+    "Nanded": {
+      "lat": 19.1725722,
+      "lon": 77.2914124,
+      "display_name": "Nanded, Maharashtra, India",
+      "osm_type": "relation",
+      "osm_id": 10340194
+    },
+    "Umri": {
+      "lat": 19.0217132,
+      "lon": 77.5890357,
+      "display_name": "Umri, Nanded, Maharashtra, 431807, India",
+      "osm_type": "relation",
+      "osm_id": 10340195
+    }
+  }
+}

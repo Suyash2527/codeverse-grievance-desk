@@ -1,0 +1,4 @@
+department_id,department_name,service_scope,jurisdiction_type,jurisdiction_mapping,contact_email_demo,contact_channel,mock_webhook_id,is_real_contact,notes
+D001,Public Works Department,"Road maintenance, potholes, street infrastructure",Taluka-specific,Only two sample talukas: Nanded; Mukhed,demo-pwd@example.invalid,Mock email + mock webhook,MOCK-WEBHOOK-D001,False,Synthetic fixture entry for CSV-swap testing.
+D002,Water Supply Department,"Water supply, pipeline leakage, water quality",District-wide,All 3 sample talukas: Nanded; Mukhed; Kinwat,demo-water@example.invalid,Mock email + mock webhook,MOCK-WEBHOOK-D002,False,Synthetic fixture entry for CSV-swap testing.
+D003,Sanitation Department,"Waste collection, public cleanliness, drainage cleaning",District-wide,All 3 sample talukas: Nanded; Mukhed; Kinwat,demo-sanitation@example.invalid,Mock email + mock webhook,MOCK-WEBHOOK-D003,False,Synthetic fixture entry for CSV-swap testing.

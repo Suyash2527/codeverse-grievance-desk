@@ -1,0 +1,112 @@
+{
+  "note": [
+    "Hand-written complaints in wording that does NOT appear in the supplied",
+    "history, used to estimate how intake behaves on the fresh scenarios",
+    "judges will type. Expected categories are the unambiguous reading of each",
+    "complaint against the supplied category master; where a complaint could",
+    "reasonably map to two categories, both are listed in 'acceptable'.",
+    "These are fixtures for evaluation only and are never loaded into the app."
+  ],
+  "complaints": [
+    {
+      "text": "The streetlight outside our lane has been dead for three weeks and children walk back from tuition in the dark.",
+      "expected": "C009",
+      "acceptable": ["C009"]
+    },
+    {
+      "text": "Nobody has picked up the rubbish from our corner since last Tuesday and it is starting to smell.",
+      "expected": "C006",
+      "acceptable": ["C006", "C007"]
+    },
+    {
+      "text": "After the rain the drain outside the school is completely choked and the water is standing.",
+      "expected": "C008",
+      "acceptable": ["C008"]
+    },
+    {
+      "text": "We have had no water in our taps for four days now, the tanker also did not come.",
+      "expected": "C004",
+      "acceptable": ["C004", "C003"]
+    },
+    {
+      "text": "The water coming from the tap is yellow and smells bad, my daughter fell ill after drinking it.",
+      "expected": "C005",
+      "acceptable": ["C005"]
+    },
+    {
+      "text": "There is a huge crater in the middle of the road near the bus stand, two scooters have already fallen.",
+      "expected": "C001",
+      "acceptable": ["C001"]
+    },
+    {
+      "text": "A live wire is hanging low over the footpath and sparking when it rains. Someone will be killed.",
+      "expected": "C010",
+      "acceptable": ["C010"]
+    },
+    {
+      "text": "My caste certificate application has been pending at the office for over a month with no update.",
+      "expected": "C013",
+      "acceptable": ["C013"]
+    },
+    {
+      "text": "The ration shop owner is refusing to give us our full quota and asking for extra money.",
+      "expected": "C025",
+      "acceptable": ["C025"]
+    },
+    {
+      "text": "The roof of our village school classroom leaks and the children sit on wet floors.",
+      "expected": "C020",
+      "acceptable": ["C020"]
+    },
+    {
+      "text": "My widow pension has not been credited for three months even though the papers were approved.",
+      "expected": "C019",
+      "acceptable": ["C019"]
+    },
+    {
+      "text": "The canal water has not reached our fields this season and the crop is drying.",
+      "expected": "C023",
+      "acceptable": ["C023"]
+    },
+    {
+      "text": "I want to report harassment by a man who follows me to work every day. Please keep my name confidential.",
+      "expected": "C017",
+      "acceptable": ["C017"]
+    },
+    {
+      "text": "A child in our neighbourhood is being made to work at a shop instead of going to school.",
+      "expected": "C018",
+      "acceptable": ["C018"]
+    },
+    {
+      "text": "The public toilet at the market has no water and is in a filthy unusable state.",
+      "expected": "C012",
+      "acceptable": ["C012", "C007"]
+    },
+    {
+      "text": "Stray cattle have taken over the main junction and there is no one from the department to remove them.",
+      "expected": "C024",
+      "acceptable": ["C024"]
+    },
+    {
+      "text": "Heavy rain last night flooded the lower colony and several houses are damaged.",
+      "expected": "C027",
+      "acceptable": ["C027"]
+    },
+    {
+      "text": "The bus shelter roof has blown off and people stand in the sun waiting.",
+      "expected": "C021",
+      "acceptable": ["C021"]
+    },
+    {
+      "text": "I have complained about this same blocked gutter four times and nothing has been done.",
+      "expected": "C029",
+      "acceptable": ["C029", "C008"]
+    },
+    {
+      "text": "The park near our society has broken swings and the grass has not been cut in months.",
+      "expected": "C016",
+      "acceptable": ["C016"]
+    }
+  ]
+}

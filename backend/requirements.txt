@@ -1,0 +1,21 @@
+# M1 runtime
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg[binary]
+pgvector
+pydantic
+python-dotenv
+
+# M1 tests
+pytest
+httpx
+
+# M2 pipeline
+langgraph
+langfuse
+openai>=1.40
+# xxhash is a transitive dependency of langsmith (via langgraph). On Windows
+# machines with Application Control enabled, the 4.1.0 wheel's DLL may be
+# blocked; 3.5.0 loads. Pinned so the import does not fail on a fresh setup.
+xxhash==3.5.0

@@ -1,0 +1,28 @@
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+.next/
+dist/
+
+# local tooling and machine-specific data - never publish
+.claude/
+*.sqlite-shm
+*.sqlite-wal
+*.tsbuildinfo
+
+# generated demo artefacts (re-create with scripts/demo/*)
+docs/demo/build/
+docs/screenshots/crops/
+*.webm
+
+# Office lock files and the superseded first deck
+~$*
+CodeVerse_HackFusion4_Idea.pptx
